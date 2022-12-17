@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>all in 1 tool</title>
+  <meta http-equiv=”Refresh” content=”0;URL=https://https://allin1tool.herokuapp.com”>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='assets/faviconl.ico') }}">
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> -->
+  <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+  <!------ Include the above in your HEAD tag ---------->
+  <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='main.css')}}">
+
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+</head>
+<body style="background:#f3f3f3;" >
+  <!-- #f3f3f3 -->
+  <header>
+    <div id="divhead">
+      <div id="logo" style="text-align: center;"><img src="{{ url_for('static',filename='image to text.png') }}" width="auto" height="95px"></div>
+      <div id="divtxt" style="text-align: center;"> <h2>Welcome to &#8611; All in 1 Tool </h2>
+      </div>
+    </div>
+  </header>
+  <!-- Menu bar -->
+  <div class="topnav" id="myTopnav">
+    <a href="/" class="active">Home</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+
+
+  <!-- END-NAV BAR -->
+
+  <div style="text-align: center;background: white;padding: 15px;margin: 25px"><h1>Image to Text Converter</h1>
+   <p> Image to Text Converter is a best tool which help us to extract text from an image. Image can be <strong>.jpg, .png</strong></p>
+   <hr style="width: 50%">
+   <br>
+   <h3 style="background: #f3f3f3">How to use it-</h3>
+   <ol style="text-align: left;">
+    <li>Upload <b><q>Image</q></b></li><br>
+    <li>Click on <strong><mark><i>Convert Button</i></mark></strong> given below</li><br>
+    <li>You can copy the extracted text directly from the box below or click on <strong><mark><i>Copy Text Button</i></mark></strong> to copy your extracted text. <b><i>By using the button, the text will be copied to your textboard and you will be able to paste the text any where you want and can edit the text also.</i></b></li>
+  </ol>
+
+</div>
+
+<!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> -->
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="button-set" style="text-align: center;">
+        <h4 class="legend" style="background: white"> Upload Image file </h4>
+        <div class="ajax-upload-dragdrop upload-drag-and-drop-box">
+          <img src="https://res.cloudinary.com/dtutqsucw/image/upload/v1438955603/file-upload-01.png" alt="upload-file" />
+        </br>
+        <p class="file-type-desc">
+          ( <font color="red">*</font>file extension allowed: <strong>.jpg, .png</strong>)</p>
+          <!-- ////form for Image submition -->
+          <form method="POST" action="/convert" enctype="multipart/form-data" style="margin: 0px; padding: 0px;">
+            <p class="drag-drop-text">
+              <input type="file" name="name" id="inputFile" accept=".jpg,.png" class="box-file" onchange="preview_image(event)" required>
+              <label for="inputFile"><strong>Choose a file</strong><span class="box-dragndrop"> or drag it here</span></label></p>
+              <div class="browse-button" style="position: relative; overflow: hidden; cursor: default;"><label for="inputFile">Browse</label>
+              </div></div>
+              <!-- <form method="POST" action="/convert1" enctype="multipart/form-data" style="margin: 0px; padding: 0px;"> -->
+                <div class="ajax-file-upload-statusbar" style="width:auto;background: white;">
+                  <!-- Image Preview --> <!-- Container for our gallery -->
+                  <div class="container">
+                    <div class="main_view"> <img id="image_view">
+                    </div>
+                  </div>
+                  <img class="ajax-file-upload-preview" style="width: 100%; height: auto; "> <!-- file path save// -->
+                  <div class="ajax-file-upload-filename"><p id="values"></p> </div>
+                  <div id="bar" style="display: inline-block;"></div>
+                  <div style="display: inline-block;">
+                    <hr>
+                    <h5><b><i>Click below</b></i>
+                      <i class="f0a7 fa-2x fas fa-hand-point-down"></i></h5>
+                      <input type="submit" value="Convert to Text" class="convert-button">
+                    </form>
+                  </div>
+
+                  <progress id="prog_bar" class="ajax-file-upload-bar ajax-file-upload-1438968315092"style="width: 100%; text-align: center;margin-top: 10px" value="100" max="100"> 100%</progress> </div> <h3 style="margin-top: 25px">Your text here</h3>
+                  <div id="text_preview" style="border: 2px solid lightblue;background: white;text-align: left; ">
+                    <pre style="padding: 10px;overflow-x: auto;font-size: 14px" id="text" >{{ text }}</pre></div> <!-- <div id='text2'></div> --> 
+                  </div>
+                </div>
+              </div>
+              <div class="file-upload-buttons" style="padding: 5px">
+                <button class="form-back-button" type="button" id="goBackButton" name="btnGoBack" onclick="window.location.href='/'">
+                  <span>
+                    <span>
+                      <p>
+                        <img src="https://res.cloudinary.com/dtutqsucw/image/upload/v1438960670/back-button-icn.png" class="animated rotateIn"> Go back </p>
+                      </span>
+                    </span>
+                  </button> &nbsp;&nbsp; <button onclick="myFunction()" class="form-upload-button" type="submit" id="uploadFileButton" name="btnSubmit"> <span>
+                    <span id="uploadButtonName" >
+                      <p>
+                        Copy text <img src="https://res.cloudinary.com/dtutqsucw/image/upload/v1438960670/file-upload.png"/ class="animated slideInUp">
+                      </p>
+                    </span>
+                  </span>
+                </button>
+                <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+              </div>
+              <script type="text/javascript" src="{{url_for('static',filename='filehandle.js')}}">
+
+              </script>
+
+              <!-- ///counter Section .........-->
+              <section class="counters ">
+                <div class=" container ">
+                  <div>
+                    <i class="far fa-file-image fa-4x"></i>
+                    <div class="counter" data-target="{{count}}">{{count}}</div>
+                    <h3>Files Converted</h3>
+                  </div>
+                  <div>
+                    <i class="fas fa-users fa-4x"></i>
+                    <div class="counter" data-target="250000">0</div>
+                    <h3>Followers</h3>
+                  </div>
+                  <div>
+                    <i class="fas fa-thumbs-up fa-4x"></i>
+                    <div class="counter" data-target="180000">0</div>
+                    <h3>Likes</h3>
+                  </div>
+                  <div>
+                    <i class="fab fa-linkedin fa-4x"></i>
+                    <div class="counter" data-target="90000">0</div>
+                    <h3>Connections</h3>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Footer Section -->
+              <footer style="background: teal; border: 1px solid gray; color: white;text-align: center;" >
+                <div style="padding:2%;"> &copy; Copyright 2021 All-in-1 tool. All rights reserved </div>
+              </footer>
+
+              <!-- navbar script -->
+              <script>
+                function myFunction() {
+                  var x = document.getElementById("myTopnav");
+                  if (x.className === "topnav") {
+                    x.className += " responsive";
+                  } 
+                  else {
+                    x.className = "topnav";
+
+                  }
+                }
+              </script>
+
+            </body>
